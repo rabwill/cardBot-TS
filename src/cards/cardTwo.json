@@ -1,0 +1,37 @@
+{
+    "type": "AdaptiveCard",   
+    "refresh": {
+      "userIds": "${userIds}",
+      "action": {
+        "type": "Action.Execute",
+        "verb": "refresh",
+        "title": "Refresh",
+        "data": {
+          "cardId": "${cardId}"
+        }
+      }
+    },
+    "body": [
+      {
+        "type": "TextBlock",
+        "text": "${text}",
+        "size": "Large",
+        "color": "Accent"
+      },
+      {
+        "type": "ActionSet",
+        "actions": [
+          {
+            "type": "Action.Execute",
+            "title": "Test Again!",
+            "verb": "testAgain",
+            "data": {
+            },
+            "style": "positive"
+          }
+        ]
+      }
+    ],
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.4"
+  }

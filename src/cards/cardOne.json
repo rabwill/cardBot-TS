@@ -1,0 +1,44 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.4",
+  "refresh": {
+    "userIds": "${userIds}",
+    "action": {
+      "type": "Action.Execute",
+      "verb": "refresh",
+      "title": "Refresh",
+      "data": {
+        "cardId": "${cardId}"
+      }
+    }
+  },
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Hello, please write a message.",
+      "wrap": true,
+      "size": "Large"
+    },
+    {
+      "type": "Input.Text",
+      "placeholder": "",
+      "spacing": "Medium",
+      "id": "text"
+    },
+    {
+      "type": "ActionSet",
+      "actions": [
+        {
+          "type": "Action.Execute",
+          "title": "Send",
+          "verb": "send",
+          "data": {
+            "cardId": "${cardId}"
+          },
+          "style": "positive"
+        }
+      ]
+    }
+  ]
+}
