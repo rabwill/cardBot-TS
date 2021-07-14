@@ -16,7 +16,7 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Take a moment to vote for you team mate's question",
+      "text": "Did you wanna take a moment to reply to your team mate's question?",
       "size": "medium",
       "weight": "bolder",
       "wrap": true
@@ -28,12 +28,18 @@
       "size": "Large"
     },
     {
+      "type": "Input.Text",
+      "placeholder": "",
+      "spacing": "Medium",
+      "id": "text"
+    },
+    {
       "type": "ActionSet",
       "actions": [
         {
           "type": "Action.Execute",
-          "title": "Vote",
-          "verb": "vote",
+          "title": "Boom",
+          "verb": "ok",
           "data": {
             "cardId": "${cardId}"
           },

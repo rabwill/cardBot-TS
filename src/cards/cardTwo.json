@@ -14,9 +14,9 @@
     "body": [
       {
         "type": "TextBlock",
-        "text": "Thank you for your vote for the question ' ${question} '",
-        "size": "Large",
-        "color": "Accent"
+        "text": "Thank you for your response for the question ' ${question} '",      
+        "color": "Accent",
+        "wrap": true
       }
   
     ],
