@@ -16,23 +16,24 @@
   "body": [
     {
       "type": "TextBlock",
-      "text": "Hello, please write a message.",
-      "wrap": true,
-      "size": "Large"
+      "text": "Take a moment to vote for you team mate's question",
+      "size": "medium",
+      "weight": "bolder",
+      "wrap": true
     },
     {
-      "type": "Input.Text",
-      "placeholder": "",
-      "spacing": "Medium",
-      "id": "text"
+      "type": "TextBlock",
+      "text": "${question}",
+      "wrap": true,
+      "size": "Large"
     },
     {
       "type": "ActionSet",
       "actions": [
         {
           "type": "Action.Execute",
-          "title": "Send",
-          "verb": "send",
+          "title": "Vote",
+          "verb": "vote",
           "data": {
             "cardId": "${cardId}"
           },

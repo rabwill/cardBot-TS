@@ -2,20 +2,21 @@
 // Licensed under the MIT License.
 
 import * as path from 'path';
-
 import { config } from 'dotenv';
 const ENV_FILE = path.join(__dirname, '..', '.env');
 config({ path: ENV_FILE });
-
 import * as restify from 'restify';
 
 // Import required bot services.
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
-import { BotFrameworkAdapter } from 'botbuilder';
+import { BotFrameworkAdapter,ConversationState, 
+    MemoryStorage } from 'botbuilder';
 
 // This bot's main dialog.
 import { EchoBot } from './bot';
-
+// Set up bot state
+const memoryStorage = new MemoryStorage();
+const conversationState = new ConversationState(memoryStorage);
 
 // Create HTTP server.
 const server = restify.createServer();
@@ -56,7 +57,7 @@ const onTurnErrorHandler = async (context, error) => {
 adapter.onTurnError = onTurnErrorHandler;
 
 // Create the main dialog.
-const myBot = new EchoBot();
+const myBot = new EchoBot(conversationState);
 
 // Listen for incoming requests.
 server.post('/api/messages', (req, res) => {

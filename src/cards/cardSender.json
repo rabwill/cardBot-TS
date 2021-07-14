@@ -3,11 +3,22 @@
    "body": [
     {
       "type": "TextBlock",
-      "text": "I sent the card, no action",
-      "size": "Large",
+      "text": "Hi initiator, you have ${turn} votes for your question : ' ${question} ' 💥",
+      "wrap": true,
       "color": "Accent"
     }
   ],
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.4"
+  "version": "1.4",
+  "refresh": {
+    "userIds": "${userIds}",
+    "action": {
+      "type": "Action.Execute",
+      "verb": "refresh",
+      "title": "Refresh",
+      "data": {
+        "cardId": "${cardId}"
+      }
+    }
+  }
 }
