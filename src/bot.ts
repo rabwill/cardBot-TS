@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { ActivityHandler, MessageFactory, CardFactory, InvokeResponse, AdaptiveCardInvokeResponse, TurnContext, InvokeException, StatusCodes } from 'botbuilder';
+import { ActivityHandler, MessageFactory, CardFactory, InvokeResponse, TurnContext, InvokeException, StatusCodes } from 'botbuilder';
 import * as ACData from "adaptivecards-templating";
 import * as cardOnefile from "./cards/cardOne.json";
 import * as cardTwofile from "./cards/cardTwo.json";
 const CONVERSATION_DATA_PROPERTY = 'conversationData';
-export class EchoBot extends ActivityHandler {
-    conversationData: any;
-    conversationState: any;
-    conversationDataAccessor: any;
+
+export class EchoBot extends ActivityHandler {   
+    conversationState;
+    conversationDataAccessor;
     constructor(conversationState) {
         super();
         // Create conversation object
@@ -20,7 +20,7 @@ export class EchoBot extends ActivityHandler {
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {          
             //empty access for conversation data
-            const conversationData = await this.conversationDataAccessor.get(context, {});
+            const conversationData:cardBotData = await this.conversationDataAccessor.get(context,{});
             //initial card or the base card   
             const template = new ACData.Template(cardOnefile);           
             //save the initiator id as the person who called the Bot          
@@ -69,7 +69,7 @@ export class EchoBot extends ActivityHandler {
              
                 const request = context.activity.value;            
                 if (request) {
-                const conversationData = await this.conversationDataAccessor.get(context); 
+                const conversationData:cardBotData = await this.conversationDataAccessor.get(context,{}); 
                 let clickCount = conversationData.clickCount || 0; 
                     switch (request.action.verb) {
                         case 'ok': {
@@ -111,16 +111,16 @@ export class EchoBot extends ActivityHandler {
         }
     }
 
-    createInvokeResponse(body?: any): InvokeResponse {
+    createInvokeResponse(body?: {}): InvokeResponse {
         return { status: 200, body };
     }
     //send the base card
-    async processSend(conversationData:any) {
+    async processSend(conversationData:cardBotData) {
         const template = new ACData.Template(cardOnefile);        
         return template.expand({ $root: { question:conversationData.question,userIds: conversationData.users } });
     }
     //process refresh of cards based on the userIds array
-    async processRefresh(userId:string, conversationData:any) {      
+    async processRefresh(userId:string, conversationData:cardBotData) {      
         let  template;          
         //initiator 
         if(conversationData.initiator===userId)   {
@@ -142,8 +142,7 @@ export class EchoBot extends ActivityHandler {
 
     }
     //generate card with responses from mates
-    generateDynamicAdaptiveCard(response) {
-       
+    generateDynamicAdaptiveCard(response:cardResponse[]) {       
         var body = [  {
             "type": "TextBlock",
             "text": "Hi initiator, ${click} team mates responded to your question : ' ${question} ' 💥",
@@ -179,6 +178,16 @@ export class EchoBot extends ActivityHandler {
         return card;
     }
 }
-
+interface cardBotData {
+    initiator: string;
+    clickCount:number;
+    question:string;
+    users:string[];
+    response:cardResponse[];
+  }
+  interface cardResponse{
+      name:string;
+      text:string;
+  }
 
 
