@@ -1,8 +1,11 @@
 # cardBotTS
 
-A bot that demonstrates UAM capabilities
+A bot that demonstrates [UAM](https://aka.ms/universal-actions-model) capabilities. But really this is a fun project 😍
 
 This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+
+See it work!
+![uam-image](./assets/uam.gif)
 
 ## Prerequisites
 
@@ -12,6 +15,9 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     # determine node version
     node --version
     ```
+- [Microsoft 365 dev tenant](https://developer.microsoft.com/en-us/microsoft-365/dev-program?WT.mc_id=m365-35338-rwilliams)
+
+- [A bot](https://dev.botframework.com/bots/) with ` Messaging endpoint` as the ngrok url appended with `api/messages`
 
 ## To run the bot
 
@@ -25,43 +31,23 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     ```bash
     npm start
     ```
+- Start [ngrok](https://ngrok.com/) with command below
 
-## Testing the bot using Bot Framework Emulator
+```bash
+ngrok http-host-header=localhost:3978 
+```
+- Copy the ngrok url with https and paste it in the BOT configuration under `Messaging endpoint`
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+- Update the `botId`, `validDomains` and other necessary properties in the `manifest.json` file in the folder `appManifest`.
 
-- Install the Bot Framework Emulator version 4.9.0 or greater from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+- Zip the three files (manifest.json and the icons) which is now your `Microsoft Teams app`
 
-### Connect to the bot using Bot Framework Emulator
+- Upload it to `Microsoft Teams` and use it in a `Team` or `Group chat` to further test it.
 
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
-
-## Deploy the bot to Azure
-
-### Publishing Changes to Azure Bot Service
-
-    ```bash
-    # build the TypeScript bot before you publish
-    npm run build
-    ```
-
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
 
 ## Further reading
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Dialogs](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-dialog?view=azure-bot-service-4.0)
-- [Gathering Input Using Prompts](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-prompts?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
-- [TypeScript](https://www.typescriptlang.org)
-- [Restify](https://www.npmjs.com/package/restify)
-- [dotenv](https://www.npmjs.com/package/dotenv)
+- [Bot Framework Documentation](https://docs.botframework.com?WT.mc_id=m365-35338-rwilliams)
+- [Bot in Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/bots/what-are-bots?WT.mc_id=m365-35338-rwilliams)
+- [Universal action model](https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/universal-actions-for-adaptive-cards/overview?WT.mc_id=m365-35338-rwilliams)
+- [Bot generator](https://www.npmjs.com/package/generator-botbuilder)
